@@ -22,8 +22,10 @@ echo -n ${POOL_BASE_DOMAIN} > /app/images/base_domain
 # setup hosts file
 echo ${POOL_BASE_DOMAIN} >> /etc/hosts
 
-chown root:docker /var/run/docker.sock && \
-chmod 775 /var/run/docker.sock && \
+if [ -n "$DOCKER_GID" ]; then
+    pool groupmod -g $DOCKER_GID docker
+fi
+
 service crond start && \
 service httpd start && \
 supervisord -c /etc/supervisord.conf

@@ -83,5 +83,6 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
               --env PREVIEW_REPOSITORY_URL=${PREVIEW_REPOSITORY_URL} \
               --env POOL_BASE_DOMAIN=${POOL_BASE_DOMAIN} \
               --env GITHUB_BOT=${GITHUB_BOT} \
+              --env DOCKER_GID=$(grep docker: /etc/group | awk -F ':' '{ print $3 }') \
               --name pool -p 80:80 pool-server
 hostname pool
