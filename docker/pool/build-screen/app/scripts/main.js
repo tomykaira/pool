@@ -21,4 +21,3 @@ function showCommitId() {
 function getCommitId() {
  return document.location.host.split(".")[0];
 }
-

@@ -10,7 +10,7 @@ module Builder
     end
 
     def find_or_create_device(git_commit_id, res, log_file)
-      @m.synchronize do 
+      @m.synchronize do
         if @devices[git_commit_id]
           @devices[git_commit_id].add_device(res)
         else
