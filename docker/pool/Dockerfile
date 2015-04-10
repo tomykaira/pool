@@ -64,6 +64,7 @@ RUN groupadd pool \
 # Set target preview repository
 ENV PREVIEW_REPOSITORY_URL=https://github.com/mookjp/flaskapp.git \
 	MAX_CONTAINERS=10 \
+	GIT_COMMIT_ID_CACHE_EXPIRE=10 \
 	POOL_BASE_DOMAIN=pool.dev \
 	GITHUB_BOT=false
 
