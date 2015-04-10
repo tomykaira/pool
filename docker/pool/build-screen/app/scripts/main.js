@@ -3,15 +3,16 @@
     var es = new EventSource("/build/" + getCommitId());
     es.addEventListener("build_log", function(event){
         $(".log-console").append("\n" + event.data);
-        $(".log-console").animate(
-            { scrollTop:
-                $(".log-console")[0].scrollHeight - $(".log-console").height()
-            },
-            50);
     });
 
     es.addEventListener("build_finished", function(event){
-	document.location.reload();
+        es.close();
+        if (event.data == 'SUCCESS') {
+            $(".log-console").append('\nDocker host is ready! Reloading ...');
+            document.location.reload();
+        } else {
+            $(".log-console").append('\nBuild failed.');
+        }
     });
 })();
 

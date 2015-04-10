@@ -49,9 +49,9 @@ module Builder
       end
     end
 
-    def notify_finished
+    def notify_finished(result)
       @m.synchronize do
-        @responses.each{|res| res.send_event('build_finished', 'FINISHED') }
+        @responses.each{|res| res.send_event('build_finished', result) }
       end
     end
 

@@ -120,6 +120,7 @@ module Builder
         @logger.error("No response after #{BUILD_LOCK_TIMEOUT}. Please reload the page.")
       rescue => ex
         @logger.error ex
+        @log_device.notify_finished('FAILURE')
         raise
       ensure
         @logger.close
@@ -149,7 +150,7 @@ module Builder
           raise "Response status is not ready: #{res.code}"
         end
         @logger.info("Application is ready! forwarding to port #{port}")
-        @log_device.notify_finished
+        @log_device.notify_finished('SUCCESS')
       rescue => e
         @logger.info e
         if tried_count <= 30
