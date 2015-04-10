@@ -36,9 +36,6 @@ describe 'git handler' do
     tmp_repository_file_path =
         File.expand_path('preview_target_repository', @output_dir_path)
     File.copy_stream(fixture_repository_file_path, tmp_repository_file_path)
-
-    git_commit_id_cache_expire_path = File.join(@output_dir_path, 'git_commit_id_cache_expire')
-    File.write(git_commit_id_cache_expire_path, 10)
   end
 
   after(:each) do
