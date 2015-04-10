@@ -23,7 +23,7 @@ echo -n ${POOL_BASE_DOMAIN} > /app/images/base_domain
 echo ${POOL_BASE_DOMAIN} >> /etc/hosts
 
 if [ -n "$DOCKER_GID" ]; then
-    pool groupmod -g $DOCKER_GID docker
+    groupmod -g $DOCKER_GID docker
 fi
 
 service crond start && \
