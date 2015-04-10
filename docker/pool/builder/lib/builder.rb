@@ -175,6 +175,16 @@ module Builder
                         :workspace_dir => @git_commit_id)
 
       @logger.info @workspace.checkout(@git_commit_id)
+      Dir.chdir(@workspace.dir.path) do
+        IO.popen('git submodule update --init --recursive 2>&1') do |f|
+          while line = f.gets
+            @logger.info(line)
+          end
+        end
+      end
+      unless $?.success?
+        raise 'Failed to update git submodule'
+      end
 
       @logger.info 'Start building docker image...'
       image = Docker.build("#{@repository[:container_prefix]}/#{@git_commit_id}",
