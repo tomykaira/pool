@@ -76,8 +76,7 @@ wget -q https://raw.githubusercontent.com/jpetazzo/nsenter/master/docker-enter -
 chmod +x ${POOL_BIN_PATH}/docker-enter
 
 # build build-server
-cd /app/docker/pool
-docker build -t pool-server .
+./rebuild_build_server
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock \
               --env MAX_CONTAINERS=${MAX_CONTAINERS} \
               --env PREVIEW_REPOSITORY_URL=${PREVIEW_REPOSITORY_URL} \
